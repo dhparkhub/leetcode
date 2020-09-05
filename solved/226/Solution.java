@@ -27,5 +27,5 @@ class Solution {
         root.left = right;
         root.right = left;
         return root;
-    }
+    }// O(N)
 }
