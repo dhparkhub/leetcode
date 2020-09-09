@@ -5,6 +5,12 @@ class Solution {
             reversed = reversed * 10 + x % 10;
             x /= 10;
         }
-        return reversed == (int) reversed ? (int) reversed : 0;
+
+        // overflow
+        if (reversed != (int) reversed) {
+            return 0;
+        }
+
+        return (int) reversed;
     }
 }
