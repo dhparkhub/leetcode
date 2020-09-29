@@ -18,8 +18,7 @@ class Solution {
             }
         }// O(N)
 
-        // check if open character remains
-        return stack.isEmpty();
+        return stack.isEmpty();// check if open character remains
     }// O(N)
 
     private boolean isValid(char open, char close) {
