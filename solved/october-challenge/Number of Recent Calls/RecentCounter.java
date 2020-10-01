@@ -1,9 +1,8 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 class RecentCounter {
-    private final List<Integer> requests = new ArrayList<>();
-    private int firstValidIndex = 0;
+    private final Queue<Integer> requests = new LinkedList<>();
 
     public RecentCounter() {
         // constructor
@@ -11,12 +10,9 @@ class RecentCounter {
 
     public int ping(int t) {
         requests.add(t);
-        for (int i = firstValidIndex; i < requests.size(); i++) {
-            if (requests.get(i) >= t - 3000) {
-                firstValidIndex = i;
-                break;
-            }
+        while (!requests.isEmpty() && requests.peek() < t - 3000) {
+            requests.poll();
         }
-        return requests.size() - firstValidIndex;
+        return requests.size();
     }
 }
