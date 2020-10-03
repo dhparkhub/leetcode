@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Leetcode] "
+title: "[Leetcode] 39. Combination Sum"
 tags: ["leetcode"]
 comments: true
 ---
