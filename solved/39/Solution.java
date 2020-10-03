@@ -4,17 +4,15 @@ import java.util.stream.Collectors;
 
 class Solution {
     private final List<List<Integer>> answer = new ArrayList<>();
-    private int[] candidates;
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        this.candidates = candidates;
-        combinationSum(0, target, new ArrayList<>());
-        return answer.stream().distinct().collect(Collectors.toList());
+        combinationSum(candidates, target, 0, new ArrayList<>());
+        return answer;
     }
 
-    private void combinationSum(int index, int target, List<Integer> list) {
+    private void combinationSum(int[] candidates, int target, int index, List<Integer> combination) {
         if (target == 0) {
-            answer.add(list);
+            answer.add(new ArrayList<>(combination));
             return;
         }
 
@@ -22,15 +20,12 @@ class Solution {
             return;
         }
 
-        combinationSum(index + 1, target, list);
+        combinationSum(candidates, target, index + 1, new ArrayList<>(combination));
 
-        for (int i = 1; target >= 0; i++) {
+        while (target > 0) {
             target -= candidates[index];
-            List<Integer> tempList = new ArrayList<>(list);
-            for (int j = 0; j < i; j++) {
-                tempList.add(candidates[index]);
-            }
-            combinationSum(index, target, tempList);
+            combination.add(candidates[index]);
+            combinationSum(candidates, target, index + 1, new ArrayList<>(combination));
         }
     }
 }
