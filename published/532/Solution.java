@@ -9,12 +9,12 @@ class Solution {
             if (i > 0 && nums[i - 1] == nums[i]) {
                 continue;
             }
-            int pairIndex = Arrays.binarySearch(nums, i + 1, nums.length, nums[i] + k);
+            int pairIndex = Arrays.binarySearch(nums, i + 1, nums.length, nums[i] + k);// O(logN)
             if (pairIndex >= 0) {
                 pairsCount++;
             }
         }// O(NlogN)
 
         return pairsCount;
-    }
+    }// O(NlogN)
 }
