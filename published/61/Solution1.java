@@ -29,12 +29,11 @@ class Solution {
         List<ListNode> list = new ArrayList<>();
         while (true) {
             list.add(head);
-            if (head.next != null) {
-                head = head.next;
-                continue;
+            if (head.next == null) {
+                head.next = list.get(0);
+                break;
             }
-            head.next = list.get(0);
-            break;
+            head = head.next;
         }
 
         k %= list.size();
