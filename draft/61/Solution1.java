@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 class ListNode {
@@ -24,20 +26,21 @@ class Solution {
             return head;
         }
 
-        Map<Integer, ListNode> nodeMap = new HashMap<>();
-        ListNode tempNode = head;
-        for (int i = 0; ; i++, tempNode = tempNode.next) {
-            nodeMap.put(i, tempNode);
-            if (tempNode.next == null) {
-                tempNode.next = head;
-                break;
+        List<ListNode> list = new ArrayList<>();
+        while (true) {
+            list.add(head);
+            if (head.next != null) {
+                head = head.next;
+                continue;
             }
+            head.next = list.get(0);
+            break;
         }
 
-        k %= nodeMap.size();
-        int headIndex = (nodeMap.size() - k) % nodeMap.size();
-        int tailIndex = headIndex != 0 ? headIndex - 1 : nodeMap.size() - 1;
-        nodeMap.get(tailIndex).next = null;
-        return nodeMap.get(headIndex);
+        k %= list.size();
+        int headIndex = (list.size() - k) % list.size();
+        int tailIndex = headIndex != 0 ? headIndex - 1 : list.size() - 1;
+        list.get(tailIndex).next = null;
+        return list.get(headIndex);
     }
 }
