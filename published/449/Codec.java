@@ -11,15 +11,11 @@ class TreeNode {
     }
 }
 
-
 class Codec {
-    private TreeNode root;
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
-        if (root == null) {
-            return null;
-        }
+        if (root == null) return null;
 
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
@@ -37,36 +33,28 @@ class Codec {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        if (data == null) {
-            return null;
-        }
+        if (data == null) return null;
 
         String[] temp = data.split("\\s+");
+        TreeNode root = null;
         for (String e : temp) {
-            push(root, Integer.parseInt(e));
-        }
+            root = push(root, Integer.parseInt(e));// O(logN)
+        }// O(NlogN)
 
         return root;
     }
 
-    private void push(TreeNode node, int data) {
+    private TreeNode push(TreeNode node, int data) {
         if (node == null) {
-            root = new TreeNode(data);
-            return;
+            return new TreeNode(data);
         }
 
         if (data < node.val) {
-            if (node.left == null) {
-                node.left = new TreeNode(data);
-            } else {
-                push(node.left, data);
-            }
+            node.left = push(node.left, data);
         } else {
-            if (node.right == null) {
-                node.right = new TreeNode(data);
-            } else {
-                push(node.right, data);
-            }
+            node.right = push(node.right, data);
         }
-    }
+
+        return node;
+    }// O(logN)
 }
