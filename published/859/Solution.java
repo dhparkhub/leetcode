@@ -21,12 +21,20 @@ class Solution {
                     diff[1] = i;
                     continue;
                 }
-                return false;
+                return false;// 3 or more different characters
             }
         }
 
-        if (diff[0] == diff[1]) return maxK >= 2;
-        if (diff[1] == -1) return false;
+        // A and B are same
+        if (diff[0] == diff[1]) {
+            return maxK >= 2;
+        }
+
+        // one different character
+        if (diff[1] == -1) {
+            return false;
+        }
+
         return A.charAt(diff[0]) == B.charAt(diff[1]) && A.charAt(diff[1]) == B.charAt(diff[0]);
     }
 }
