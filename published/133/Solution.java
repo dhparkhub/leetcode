@@ -30,7 +30,7 @@ class Solution {
         if (node.neighbors.isEmpty()) return new Node(1);
 
         boolean[] visited = new boolean[1001];
-        Node[] nodes = new Node[1001];
+        Node[] cloned = new Node[1001];
 
         Queue<Node> q = new LinkedList<>();
         q.add(node);
@@ -38,23 +38,23 @@ class Solution {
 
         while (!q.isEmpty()) {
             Node tempNode = q.poll();
-            Node copied = copyNode(nodes, tempNode);
+            Node copied = getCloned(cloned, tempNode);
             for (Node e : tempNode.neighbors) {
                 if (!visited[e.val]) {
                     visited[e.val] = true;
                     q.add(e);
                 }
-                copied.neighbors.add(copyNode(nodes, e));
+                copied.neighbors.add(getCloned(cloned, e));
             }
         }
 
-        return copyNode(nodes, node);
+        return getCloned(cloned, node);
     }
 
-    private Node copyNode(Node[] nodes, Node node) {
-        if (nodes[node.val] == null) {
-            return nodes[node.val] = new Node(node.val);
+    private Node getCloned(Node[] cloned, Node node) {
+        if (cloned[node.val] == null) {
+            return cloned[node.val] = new Node(node.val);
         }
-        return nodes[node.val];
+        return cloned[node.val];
     }
 }
