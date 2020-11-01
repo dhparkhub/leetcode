@@ -22,7 +22,7 @@ class Solution {
             answer = answer << 1;
             answer |= head.val;
             head = head.next;
-        }
+        }// O(N)
         return answer;
     }
 }
