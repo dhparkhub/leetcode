@@ -1,40 +1,34 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 class Solution {
-    private final LinkedList<List<Integer>> mergedIntervals = new LinkedList<>();
-
     public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
 
+        LinkedList<List<Integer>> merged = new LinkedList<>();
         for (int[] interval : intervals) {
-            int start = interval[0];
-            int end = interval[1];
-
-            if (mergedIntervals.isEmpty()) {
-                mergedIntervals.add(Arrays.asList(start, end));
-                continue;
-            }
-
-            List<Integer> lastInterval = mergedIntervals.removeLast();
-            int nStart = lastInterval.get(0);
-            int nEnd = lastInterval.get(1);
-            if (start <= nEnd) {
-                nEnd = Math.max(nEnd, end);
-                mergedIntervals.add(Arrays.asList(nStart, nEnd));
-                continue;
-            }
-
-            mergedIntervals.add(lastInterval);
-            mergedIntervals.add(Arrays.asList(start, end));
+            merge(merged, interval);
         }
 
-        int[][] answer = new int[mergedIntervals.size()][];
-        for (int i = 0; i < mergedIntervals.size(); i++) {
-            answer[i] = new int[]{mergedIntervals.get(i).get(0), mergedIntervals.get(i).get(1)};
+        int[][] answer = new int[merged.size()][2];
+        for (int i = 0; i < answer.length; i++) {
+            answer[i] = new int[]{merged.get(i).get(0), merged.get(i).get(1)};
         }
         return answer;
+    }
+
+    private void merge(LinkedList<List<Integer>> merged, int[] interval) {
+        if (merged.isEmpty()) {
+            merged.add(Arrays.asList(interval[0], interval[1]));
+            return;
+        }
+
+        List<Integer> last = merged.removeLast();
+        if (interval[0] <= last.get(1)) {
+            merged.add(Arrays.asList(last.get(0), Math.max(last.get(1), interval[1])));
+            return;
+        }
+
+        merged.add(last);
+        merged.add(Arrays.asList(interval[0], interval[1]));
     }
 }
