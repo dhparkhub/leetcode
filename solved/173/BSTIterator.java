@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 class TreeNode {
     int val;
@@ -21,25 +20,25 @@ class TreeNode {
 }
 
 class BSTIterator {
-    private final List<TreeNode> list = new ArrayList<>();
-    private int index = -1;
+    private final Stack<TreeNode> stack = new Stack<>();
 
     public BSTIterator(TreeNode root) {
-        makeNodeSet(root);
-    }
-
-    private void makeNodeSet(TreeNode root) {
-        if (root == null) return;
-        makeNodeSet(root.left);
-        list.add(root);
-        makeNodeSet(root.right);
+        push(stack, root);
     }
 
     public int next() {
-        return list.get(++index).val;
+        TreeNode temp = stack.pop();
+        push(stack, temp.right);
+        return temp.val;
     }
 
     public boolean hasNext() {
-        return index + 1 < list.size();
+        return !stack.isEmpty();
+    }
+
+    private void push(Stack<TreeNode> stack, TreeNode root) {
+        if (root == null) return;
+        stack.push(root);
+        push(stack, root.left);
     }
 }
