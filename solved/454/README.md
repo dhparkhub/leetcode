@@ -1,4 +1,4 @@
-# [Java] LeetCode 454. 4Sum II
+# LeetCode 454. 4Sum II (Java)
 
 안녕하세요, 도해입니다. 오늘은 LeetCode [454. 4Sum II](https://leetcode.com/problems/4sum-ii/) 문제를 한 번 풀어보겠습니다.
 
