@@ -2,26 +2,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Solution {
-    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
-        Map<Integer, Integer> map1 = new HashMap<>();
-        for (int a : A) {
-            for (int b : B) {
-                map1.put(a + b, map1.getOrDefault(a + b, 0) + 1);
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i : nums1) {
+            for (int j : nums2) {
+                map.put(i + j, map.getOrDefault(i + j, 0) + 1);
             }
-        }
-
-        Map<Integer, Integer> map2 = new HashMap<>();
-        for (int c : C) {
-            for (int d : D) {
-                map2.put(c + d, map2.getOrDefault(c + d, 0) + 1);
-            }
-        }
-
+        }// O(N^2)
         int answer = 0;
-        for (Map.Entry<Integer, Integer> e : map1.entrySet()) {
-            answer += e.getValue() * map2.getOrDefault(-e.getKey(), 0);
-        }
-
+        for (int i : nums3) {
+            for (int j : nums4) {
+                answer += map.getOrDefault(-(i + j), 0);
+            }
+        }// O(N^2)
         return answer;
-    }
+    }// O(N^2)
 }
