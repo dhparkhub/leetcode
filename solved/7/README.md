@@ -37,12 +37,15 @@ class Solution {
     while (x != 0) {
       reversed = (reversed * 10) + (x % 10);
       x /= 10;
-    }//O(N)
+    }//O(D)
     return isOutOfRange(reversed) ? 0 : (int) reversed;
-  }//O(N)
+  }//O(D)
 
   private boolean isOutOfRange(long num) {
     return num != (int) num;
   }//O(1)
 }
 ```
+
+- 숫자의 자리수만큼 반복하기 때문에 자리수를 `D`라고 하면 시간 복잡도는 `O(D)`가 된다.
+- 공간 복잡도는 `O(1)`이 된다.

@@ -4,9 +4,9 @@ class Solution {
         while (x != 0) {
             reversed = (reversed * 10) + (x % 10);
             x /= 10;
-        }//O(N)
+        }//O(D)
         return isOutOfRange(reversed) ? 0 : (int) reversed;
-    }//O(N)
+    }//O(D)
 
     private boolean isOutOfRange(long num) {
         return num != (int) num;
